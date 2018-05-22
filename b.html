@@ -1,0 +1,32 @@
+<html> 
+  <head> 
+    <title>Ajax at work</title> 
+
+    <script language="javascript">
+     function preload()
+      {
+        var txt=loadStrings("a.txt");  
+      }
+      function setup()
+      {
+        noCanvas();
+        console.log(txt);
+       }  
+    </script>
+  </head> 
+
+  <body>
+
+    <h1>Fetching data with Ajax & javaScript</h1>
+
+    <form>
+      <input type="button" value="Display Message">
+        onclick = "getData('data.txt', 'targetDiv')" 
+    </input></form>
+
+    <div id="targetDiv">
+      <p>The fetched data will go here.</p> 
+    </div> 
+
+  </body> 
+</html>
