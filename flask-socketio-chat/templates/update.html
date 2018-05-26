@@ -14,14 +14,15 @@ $(document).ready(function() {
 		var div = document.getElementById('connected');
 		div.innerHTML="User Connected";
 	});
-	socket.on('my_response', function() {
-		$("#bakwas").html(json.data);
+	socket.on('my_add_response', function() {
+		console.log('Received message');
+		$("#bakwas").append('<li>'+"Hello world"+'</li>');
 	});
 
 
 });
 </script>
 <p id="connected"> </p>
-<p id="bakwas"> </p>
+<ul id="bakwas"> </ul>
 </body>
 </html>

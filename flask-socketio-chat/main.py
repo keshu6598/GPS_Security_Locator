@@ -13,14 +13,14 @@ def adddata():
     json = {'data':x}
     x=x+1
     #print('Message: ' + str(json.data))
-    emit('my_add_response',json)
+    emit('my_add_response',json,broadcast=True)
 @socketio.on('subtract')
 def subtractdata():
     x = 0
     json = {'data':x}
     x=x-1
     #print('Message: ' + str(json.data))
-    emit('my_add_response',json)
+    emit('my_add_response',json,broadcast=True)
 #def han/dleMessage(msg):
 #	print('Message: ' + msg)
 #	send(msg, broadcast=True)
