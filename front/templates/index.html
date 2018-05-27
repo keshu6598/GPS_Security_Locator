@@ -2,6 +2,10 @@
 <html>
 <head>
 <title>Page Title</title>
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 
 table {
@@ -55,9 +59,19 @@ td, th {
     border-radius: 50%;
 }
 </style>
+
+
 </head>
+
 <body>
 
+<script>
+
+
+
+
+
+</script>
 <div class="splits left">
 
 
@@ -111,18 +125,90 @@ td, th {
 
 <h2>ENTRY</h2>
 
-<form>
-  <div class="form-group">
-    <label for="IMEI">IMEI Number</label>
-    <input type="email" class="form-control" id="IMEI" placeholder="Enter IMEI Number">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Registration Number</label>
-    <input type="text" class="form-control" id="Registration" placeholder="Enter Registration Number">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+<div class="container">
 
-</form>  
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+
+
+      var socket = io.connect('103.37.200.133:4000');
+
+      var a = 0;
+      var b = 0;
+
+
+
+    $('#clct').prop('disabled', true);
+    $('#atch').prop('disabled', true);
+    $('#IMEI_NO').keyup(function() {
+        if(($(this).val() != '')&&($('#REG_NO').val() != '')) {
+           $('#clct').prop('disabled',false);
+           $('#atch').prop('disabled',false);
+           
+        }
+        else{
+           $('#clct').prop('disabled',true);
+         $('#atch').prop('disabled',true);}
+
+     });
+
+    $('#REG_NO').keyup(function() {
+        if(($(this).val() != '')&&($('#IMEI_NO').val() != '')) {
+           $('#clct').prop('disabled',false);
+           $('#atch').prop('disabled',false);
+           
+        }
+        else{
+           $('#clct').prop('disabled',true);
+         $('#atch').prop('disabled',true);}
+
+     });
+
+
+    $('#clct').on('click', function(){
+
+      var reg_no = $('#REG_NO').val();
+      var imei_no = $('#IMEI_NO').val();
+
+
+      var data={'reg_no' = reg_no, 'imei_no' = imei_no};
+
+      socket.emit('device_collected',data)
+
+    });
+
+
+    $('#atch').on('click', function(){
+
+
+      var reg_no = $('#REG_NO').val();
+      var imei_no = $('#IMEI_NO').val();
+
+
+      var data={'reg_no' = reg_no, 'imei_no' = imei_no};
+
+      socket.emit('device_attached',data)
+
+
+
+    });
+
+
+
+    });
+
+  </script>
+  
+   
+  <input type="text" id="IMEI_NO" placeholder="IMEI number" minlength="15" maxlength="15">
+  <input type="text" id="REG_NO" placeholder="Registration number"><br><br>
+  <button id="clct" >collected</button>
+    <button id="atch">attached</button>
+
+   
+  </div>
+
 </div>
 </body>
 </html>

@@ -1,5 +1,15 @@
-
+from flask_mysqldb import MySQL
+from dbconnect import connection
+from seperation_ofinputdata import seperation
+from storedata import storedata
+import MySQLdb
 import socket 
+class Device:
+    def __init__(self, name, lat, lng):
+        self.name = name
+        self.lat = lat
+        self.lng = lng
+
 s = socket.socket()
 print("Socket successfully created")
 
@@ -11,13 +21,20 @@ s.listen(5)
 print('socket is listening')
 
 while True :
-   file=open("write.txt","w")
-   c, addr = s.accept()
-   print('got connection from', addr)
-   output = c.recv(8192)
-   if output:
-     print("data recived", str(output))
-  
-     file.write("/n" + str(output))
-   c.close()
-   file.close()   
+   try:
+   	a, addr = s.accept()
+   	print('got connection from', addr)
+   	output = a.recv(8192)
+   	if output:
+   		if(len(str(output))>=61):
+     			try:
+     				print("data recived", str(output))
+     				data = Device("",0.0,0.0)
+     				data = seperation(str(output))
+     				storedata(data)
+     			except:
+     				pass	
+   	a.close()
+   except KeyboardInterrupt:
+   	s.close()	
+   

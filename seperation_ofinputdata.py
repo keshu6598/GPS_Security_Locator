@@ -11,17 +11,13 @@ def convertor(degg):
     c = ""
     for i in range(0, 2):
         a = a + degg[i]
-    print(a)
     for i in range(2, 4):
         b = b + degg[i]
-    print(b)
     for i in range(4, 9):
         c = c + degg[i]
-    print(c)
     c1 = float(c)
     c1 = c1 / 1000
     c1 = float(a) + float(b) / 60 + c1 / 3600
-    print(c1)
     return c1
 
 
@@ -55,4 +51,5 @@ def execution(file):
     data = lines[0]
     ans = seperation(data)
     return ans
+
 
