@@ -12,8 +12,11 @@ def index():
        userDetails = request.form
        name = userDetails['name']
        email = userDetails['email']
+       test = 23.45
        c, conn = connection()
-       c.execute("INSERT INTO users(name, email) VALUES(%s, %s)",(name,email))
+       query = """insert into datas name = %s, email=%s , test = %f"""
+       data = (name,data,test)
+       c.execute(query,data)
        conn.commit()
        c.close()
        conn.close()
